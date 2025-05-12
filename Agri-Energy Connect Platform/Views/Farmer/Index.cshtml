@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Agri_Energy_Connect_Platform.Models.Product>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My Products</h2>
+<a href="@Url.Action("Create", "Farmer")" class="btn btn-success">Add New Product</a>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Production Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.Description</td>
+                <td>@product.Category</td>
+                <td>@product.dateTime.ToString("yyyy-MM-dd")</td>
+                
+                <td>
+                        @Html.ActionLink("Edit", "Edit", new {id = product.Id }, new { @class = "btn btn-primary btn-sm" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = product.Id }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+ </table>
