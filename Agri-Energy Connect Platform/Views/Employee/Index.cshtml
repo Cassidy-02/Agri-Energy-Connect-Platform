@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Employee Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Welcome to the Employee Dashboard</h1>
+<p>Here you can manage products and view farmer details.</p>
+
+<div class="mt-4">
+    <a href="@Url.Action("Create", "Employee")" class="btn btn-success btn-lg me-3">Add Farmer</a>
+    <a href="@Url.Action("Product", "Employee")" class="btn btn-primary btn-lg">Search Products</a>
+</div>

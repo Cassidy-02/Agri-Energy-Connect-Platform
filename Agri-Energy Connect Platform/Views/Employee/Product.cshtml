@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Agri_Energy_Connect_Platform.Models.Product>
+@{
+    ViewData["Title"] = "Filtered Products";
+    var farmers = ViewBag.Farmers as List<Agri_Energy_Connect_Platform.Models.Farmer>;
+}
+
+<h2>Product Filter</h2>
+
+<form method="get" class="form-inline mb-4 row">
+    <div class="col-md-2">
+        <input type="text" name="search" value="@ViewBag.Search" class="form-control" placeholder="Search..." />
+    </div>
+
+    <div class="col-md-2">
+        
+            <select name="farmerId" class="form-control">
+                <option value="">All Farmers</option>
+                @if (farmers != null)
+                {
+                    foreach (var farmer in farmers)
+                    {
+                        var isSelected = farmer.Id.ToString() == ViewBag.SelectedFarmerId?.ToString();
+                        <option value="@farmer.Id" selected="@(isSelected ? "selected" : null)">@farmer.FullName</option>
+                    }
+                }
+            </select>
+        
+    </div>
+
+    <div class="col-md-2">
+        <input type="text" name="category" value="@ViewBag.Category" class="form-control" placeholder="Category" />
+    </div>
+
+    <div class="col-md-2">
+        <input type="date" name="startDate" value="@ViewBag.StartDate" class="form-control" />
+    </div>
+
+    <div class="col-md-2">
+        <input type="date" name="endDate" value="@ViewBag.EndDate" class="form-control" />
+    </div>
+
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Farmer</th>
+            <th>Date</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Category</td>
+            <td>@item.Farmer?.FullName</td>
+            <td>@item.dateTime.ToShortDateString()</td>
+            <td>R @item.Price.ToString("F2")</td>
+        </tr>
+    }
+    </tbody>
+</table>
